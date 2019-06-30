@@ -1,3 +1,6 @@
+fin = open('billboard.in')
+# fin = open('ex.txt')
+recordings = []
 count = 1
 for line in fin:
     if count != 1:
@@ -15,8 +18,6 @@ fin.close()
 recordings.sort()
 
 
-#print(changes)
-
-fout = open("measurement.out", "w")
-fout.write("{}".format(changes))
+fout = open("billboard.out", "w")
+fout.write("{}".format())
 fout.close()
