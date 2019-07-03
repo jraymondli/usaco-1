@@ -12,15 +12,16 @@ for line in fin:
         lw = [length, width]
         multiply = multiplier
     else:
-        lines.append(list(line.split(" ")))
+        message.append(list(line))
     count += 1
 for lines in range(lw[0]):
     for chars in range(lw[1]):
-        message[lines][chars] *= 2
+        message[lines][chars] *= multiply
 for lines in range(lw[0]):
-    "".join(message[lines])
+    message[lines] = "".join(message[lines])
 fin.close()
 fout = open("cowsignal.out", "w")
 for line in message:
-    fout.write("{}\n".format(line)
+    for i in range(multiply):
+        fout.write("{}\n".format(line))
 fout.close()
