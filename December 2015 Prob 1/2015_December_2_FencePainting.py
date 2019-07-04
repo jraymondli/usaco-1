@@ -1,5 +1,5 @@
 fin = open('paint.in')
-# fin = open('ex.txt')
+#fin = open('ex.txt')
 line_points = []
 for line in fin:
     line = line.strip()
