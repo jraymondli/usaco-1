@@ -33,11 +33,11 @@ def create_people_dict(input_list):
     return all_people
 
 
-def derive_answer(input_dict):
-    possible_milk_candidates = [True for num in range(m)]
+def derive_answer(input_dict, input_list, input_len):
+    possible_milk_candidates = [True for num in range(input_len)]
     max_sick_people = 0
     count = 1
-    for person in sick_people:
+    for person in input_list:
         for milk_drank in input_dict[person[0]]:
             if milk_drank[1] >= person[1]:
                 possible_milk_candidates[milk_drank[0] - 1] = False
@@ -61,8 +61,6 @@ def output_file(input_num):
     fout.close()
 
 
-people_drank_milk = input_file()[0]
-sick_people = input_file()[1]
-m = input_file()[2]
-people_drank_milk.sort()
-output_file(derive_answer(create_people_dict(people_drank_milk)))
+total_milks = input_file()[0]
+total_milks.sort()
+output_file(derive_answer(create_people_dict(total_milks), input_file()[1], input_file()[2]))
