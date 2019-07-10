@@ -39,7 +39,9 @@ def derive_answer(input_dict, input_list, input_len):
     milk_id = 1
     for person in input_list:
         for milk_drank in input_dict[person[0]]:
-            if milk_drank[1] >= person[1]:
+            if milk_drank[1] < person[1]:
+                break
+            else:
                 possible_milk_candidates[milk_drank[0] - 1] = False
     for milk_candidate in possible_milk_candidates:
         temp = 0
