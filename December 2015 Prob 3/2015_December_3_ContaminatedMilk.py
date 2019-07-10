@@ -36,7 +36,7 @@ def create_people_dict(input_list):
 def derive_answer(input_dict, input_list, input_len):
     possible_milk_candidates = [True for num in range(input_len)]
     max_sick_people = 0
-    count = 1
+    milk_id = 1
     for person in input_list:
         for milk_drank in input_dict[person[0]]:
             if milk_drank[1] >= person[1]:
@@ -46,12 +46,14 @@ def derive_answer(input_dict, input_list, input_len):
         if milk_candidate:
             for persons_milks_and_times in list(input_dict.values()):
                 for milk_drank in persons_milks_and_times:
-                    if count == milk_drank[0]:
+                    print(milk_drank)
+                    if milk_id == milk_drank[0]:
                         temp += 1
+
                         break
             if temp > max_sick_people:
                 max_sick_people = temp
-        count += 1
+    milk_id += 1
     return max_sick_people
 
 
