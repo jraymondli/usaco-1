@@ -61,6 +61,6 @@ def output_file(input_num):
     fout.close()
 
 
-total_milks = input_file()[0]
+total_milks, all_sick_people, amount_milks = input_file()
 total_milks.sort()
-output_file(derive_answer(create_people_dict(total_milks), input_file()[1], input_file()[2]))
+output_file(derive_answer(create_people_dict(total_milks), all_sick_people, amount_milks))
