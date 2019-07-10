@@ -44,8 +44,8 @@ def derive_answer(input_dict, input_list, input_len):
     for milk_candidate in possible_milk_candidates:
         temp = 0
         if milk_candidate:
-            for person in list(input_dict.values()):
-                for milk_drank in person:
+            for persons_milks_and_times in list(input_dict.values()):
+                for milk_drank in persons_milks_and_times:
                     if count == milk_drank[0]:
                         temp += 1
                         break
