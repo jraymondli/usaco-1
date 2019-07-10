@@ -49,11 +49,10 @@ def derive_answer(input_dict, input_list, input_len):
                     print(milk_drank)
                     if milk_id == milk_drank[0]:
                         temp += 1
-
                         break
             if temp > max_sick_people:
                 max_sick_people = temp
-    milk_id += 1
+        milk_id += 1
     return max_sick_people
 
 
