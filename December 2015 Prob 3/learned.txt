@@ -1,2 +1,3 @@
-    I should use the modular approach while coding because it makes debugging easier. I should use print to check if a
-section is working or not while debugging. I shouldn't give up while debugging. If I need help ask.
+    I should use the modular approach while coding because it makes debugging easier and makes the code easier to read.
+    I should use print to check if a section is working or not.
+    I shouldn't give up while debugging.
