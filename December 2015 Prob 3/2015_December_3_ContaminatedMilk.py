@@ -1,3 +1,14 @@
+def intersection(lst1):
+    try :
+        ai = set(lst1[0]).intersection(set(lst1[1]))
+    except :
+        ai = lst1[0]
+    for i in range(len(lst1)-3):
+        a = ai.intersection(lst1[i])
+        ai = a
+    return list(ai)
+
+
 def input_file():
     fin = open('badmilk.in')
     # fin = open('ex.txt')
@@ -33,28 +44,35 @@ def create_people_dict(input_list):
     return all_people
 
 
-def derive_answer(input_dict, input_list, input_len):
-    possible_milk_candidates = [True for num in range(input_len)]
+def find_bad_milk(input_dict, input_list, input_len):
+    possible_milk_candidates = [[] for i in range(len(input_list))]
+    for sick_person in input_list:
+        for milk_and_time in input_dict[sick_person[0]]:
+            if milk_and_time[1] < sick_person[1]:
+                possible_milk_candidates[input_list.index(sick_person)].append(milk_and_time[0])
+    for possible_bad_milks in range(len(possible_milk_candidates)):
+        try:
+            possible_milk_candidates.remove([])
+            print(possible_milk_candidates)
+        except:
+            pass
+    bad_milks = intersection(possible_milk_candidates)
+
+    return bad_milks
+
+
+def derive_answer(input_dict, input_list):
+    print(input_list)
     max_sick_people = 0
-    milk_id = 1
-    for person in input_list:
-        for milk_drank in input_dict[person[0]]:
-            if milk_drank[1] < person[1]:
-                break
-            else:
-                possible_milk_candidates[milk_drank[0] - 1] = False
-    for milk_candidate in possible_milk_candidates:
+    for milk_candidate in input_list:
         temp = 0
-        if milk_candidate:
-            for persons_milks_and_times in list(input_dict.values()):
-                for milk_drank in persons_milks_and_times:
-                    print(milk_drank)
-                    if milk_id == milk_drank[0]:
-                        temp += 1
-                        break
+        for persons_milks_and_times in list(input_dict.values()):
+            for milk_drank in persons_milks_and_times:
+                if milk_candidate == milk_drank[0]:
+                    temp += 1
+                    break
             if temp > max_sick_people:
                 max_sick_people = temp
-        milk_id += 1
     return max_sick_people
 
 
@@ -66,4 +84,5 @@ def output_file(input_num):
 
 total_milks, all_sick_people, amount_milks = input_file()
 total_milks.sort()
-output_file(derive_answer(create_people_dict(total_milks), all_sick_people, amount_milks))
+all_people = create_people_dict(total_milks)
+output_file(derive_answer(all_people, find_bad_milk(all_people, all_sick_people, amount_milks)))
