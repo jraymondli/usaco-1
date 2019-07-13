@@ -63,23 +63,15 @@ def find_bad_milk(input_dict, input_list, input_len):
 
 def derive_answer(input_dict, input_list):
     max_sick_people = 0
-    bad_milk_drank = [[], []]
     for milk_candidate in input_list:
         temp = 0
-        count = 1
         for persons_milks_and_times in list(input_dict.values()):
             for milk_drank in persons_milks_and_times:
                 if milk_candidate == milk_drank[0]:
                     temp += 1
-                    if count not in bad_milk_drank:
-                        if milk_candidate == 17:
-                            bad_milk_drank[0].append(count)
-                        else:
-                            bad_milk_drank[1].append(count)
                     break
         if temp > max_sick_people:
             max_sick_people = temp
-            count += 1
     return max_sick_people
 
 
