@@ -1,10 +1,11 @@
 def intersection(lst1):
     try :
         ai = set(lst1[0]).intersection(set(lst1[1]))
+
     except :
         ai = lst1[0]
-    for i in range(len(lst1)-3):
-        a = ai.intersection(lst1[i])
+    for i in range(1, len(ai)-2):
+        a = ai.intersection(lst1[-1*i])
         ai = a
     return list(ai)
 
@@ -53,7 +54,6 @@ def find_bad_milk(input_dict, input_list, input_len):
     for possible_bad_milks in range(len(possible_milk_candidates)):
         try:
             possible_milk_candidates.remove([])
-            print(possible_milk_candidates)
         except:
             pass
     bad_milks = intersection(possible_milk_candidates)
@@ -62,17 +62,24 @@ def find_bad_milk(input_dict, input_list, input_len):
 
 
 def derive_answer(input_dict, input_list):
-    print(input_list)
     max_sick_people = 0
+    bad_milk_drank = [[], []]
     for milk_candidate in input_list:
         temp = 0
+        count = 1
         for persons_milks_and_times in list(input_dict.values()):
             for milk_drank in persons_milks_and_times:
                 if milk_candidate == milk_drank[0]:
                     temp += 1
+                    if count not in bad_milk_drank:
+                        if milk_candidate == 17:
+                            bad_milk_drank[0].append(count)
+                        else:
+                            bad_milk_drank[1].append(count)
                     break
-            if temp > max_sick_people:
-                max_sick_people = temp
+        if temp > max_sick_people:
+            max_sick_people = temp
+            count += 1
     return max_sick_people
 
 
