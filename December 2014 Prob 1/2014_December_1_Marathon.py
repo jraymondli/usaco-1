@@ -1,8 +1,8 @@
-def distance_between_two_points(point1, point2):  # Works
+def distance_between_two_points(point1, point2):
     return abs(point2[0] - point1[0]) + abs(point2[1] - point1[1])
 
 
-def find_dist(points):  # Should work
+def find_dist(points):
     last_point = points[0]
     dist = 0
     for x, y in points:
@@ -41,7 +41,7 @@ def derive_answer(input_points):
     return find_dist(input_points)-max_length
 
 
-def output_file(input_num):  # Works
+def output_file(input_num):
     fout = open("marathon.out", "w")
     fout.write("{}".format(input_num))
     fout.close()
