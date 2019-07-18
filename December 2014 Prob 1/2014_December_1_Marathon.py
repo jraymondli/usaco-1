@@ -26,14 +26,19 @@ def input_file(file_name):
 
 
 def derive_answer(input_points):
-    min_length = find_dist(input_points)
-    for possible_point_to_skip in input_points[1:-1:]:
-        temp = input_points.copy()
-        temp.remove(possible_point_to_skip)
-        distance = find_dist(temp)
-        if distance < min_length:
-            min_length = distance
-    return min_length
+    max_length = 0
+    # Use manual counting instead of using the built in index() function
+    # Do this because manual counting always gives right index you are referring to. The index(function) goes to the
+    # first element with the VALUE of the parameter.
+    for index_value in range(len(input_points[1:-1:])):
+        distance_between_all_points = find_dist([input_points[index_value], input_points[index_value+1],
+                                                 input_points[index_value+2]])
+        distance_between_point_removed = find_dist([input_points[index_value], input_points[index_value+2]])
+        new_distance = distance_between_all_points-distance_between_point_removed
+        if new_distance > max_length:
+            max_length = new_distance
+
+    return find_dist(input_points)-max_length
 
 
 def output_file(input_num):  # Works
@@ -42,4 +47,4 @@ def output_file(input_num):  # Works
     fout.close()
 
 
-output_file(derive_answer(input_file("marathon_bronze/7.in")))
+output_file(derive_answer(input_file("marathon.in")))
