@@ -17,21 +17,39 @@ def in_area(index, lst):
     return index in range(0, len(lst))
 
 
+def check_if_horizontal(input_list, line, cell):
+    if in_area(line + 2, input_list) or in_area(cell + 2, input_list):
+        if input_list[line][cell] != "#":
+            if not in_area(cell - 1, input_list[line]) and input_list[line][cell + 1] == "." and input_list[line][cell + 2] == ".":
+                input_list[line][cell] = "!"
+            try:
+                if input_list[line][cell - 1] == "#" and input_list[line][cell + 1] == "." and input_list[line] \
+                        [cell + 2] == ".":
+                    input_list[line][cell] = "!"
+            except:
+                pass
+
+
+def check_if_vertical(input_list, line, cell):
+    if in_area(line + 2, input_list) or in_area(cell + 2, input_list):
+        if input_list[line][cell] != "#":
+
+            if not in_area(line - 1, input_list) and input_list[line + 1][cell] == "." and input_list[line + 2][cell] == ".":
+                input_list[line][cell] = "!"
+            try:
+
+                if input_list[line - 1][cell] == "#" and input_list[line + 1][cell] == "." and \
+                        input_list[line + 2][cell] == ".":
+                    input_list[line][cell] = "!"
+            except:
+                pass
+
+
 def if_starter(input_list):
     for line in range(len(input_list)):
         for cell in range(len(input_list[line])):
-            if input_list[line][cell] != "#":
-                if not in_area(cell-1, input_list[line]) and input_list[line][cell+1] == "." and input_list[line][cell+2] == ".":
-                    input_list[line][cell] = "!"
-                if not in_area(line-1, input_list) and input_list[line+1][cell] == "." and input_list[line+2][cell] == ".":
-                    input_list[line][cell] = "!"
-                try:
-                    if input_list[line][cell-1] == "#" and input_list[line][cell+1] == "." and input_list[line][cell+2] == ".":
-                        input_list[line][cell] = "!"
-                    if input_list[line-1][cell] == "#" and input_list[line+1][cell] == "." and input_list[line+2][cell] == ".":
-                        input_list[line][cell] = "!"
-                except:
-                    pass
+            check_if_horizontal(input_list, line, cell)
+            check_if_vertical(input_list, line, cell)
     return input_list
 
 
@@ -57,4 +75,4 @@ def output_file(input_list):
     fout.close()
 
 
-output_file(output_lines(if_starter(input_file("crosswords_bronze/8.in"))))
+output_file(output_lines(if_starter(input_file("crosswords.in"))))
