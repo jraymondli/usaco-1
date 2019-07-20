@@ -23,30 +23,33 @@ def in_area(index, length):
 
 
 def check_if_horizontal_lead(input_list, line, cell, num_rows):
-    if in_area(cell + 2, num_rows):
-        if input_list[line][cell] != "#":
-            if not in_area(cell - 1, num_rows) and input_list[line][cell + 1] == "." and input_list[line][cell + 2] == ".":
+    if not in_area(cell + 2, num_rows):
+        return
+    if input_list[line][cell] != "#":
+        if not in_area(cell - 1, num_rows) and input_list[line][cell + 1] == "." and \
+                input_list[line][cell + 2] == ".":
+            input_list[line][cell] = "!"
+        try:
+            if input_list[line][cell - 1] == "#" and input_list[line][cell + 1] == "." and \
+                    input_list[line][cell + 2] == ".":
                 input_list[line][cell] = "!"
-            try:
-                if input_list[line][cell - 1] == "#" and input_list[line][cell + 1] == "." and input_list[line] \
-                        [cell + 2] == ".":
-                    input_list[line][cell] = "!"
-            except:
-                pass
+        except:
+            print(line, cell)
 
 
 def check_if_vertical_lead(input_list, line, cell, num_columns):
-    if in_area(line + 2, num_columns):
-        if input_list[line][cell] != "#":
-
-            if not in_area(line - 1, num_columns) and input_list[line + 1][cell] == "." and input_list[line + 2][cell] == ".":
+    if not in_area(line + 2, num_columns):
+        return
+    if input_list[line][cell] != "#":
+        if not in_area(line - 1, num_columns) and input_list[line + 1][cell] == "." and \
+                input_list[line + 2][cell] == ".":
+            input_list[line][cell] = "!"
+        try:
+            if input_list[line - 1][cell] == "#" and input_list[line + 1][cell] == "." and \
+                    input_list[line + 2][cell] == ".":
                 input_list[line][cell] = "!"
-            try:
-                if input_list[line - 1][cell] == "#" and input_list[line + 1][cell] == "." and \
-                        input_list[line + 2][cell] == ".":
-                    input_list[line][cell] = "!"
-            except:
-                pass
+        except:
+            print(line, cell)
 
 
 def if_starter(input_list, num_rows, num_columns):
