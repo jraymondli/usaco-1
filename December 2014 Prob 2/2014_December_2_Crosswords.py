@@ -9,7 +9,6 @@ def input_file(file_name):
             all_points.append(line)
         count += 1
     fin.close()
-
     return all_points
 
 
