@@ -34,7 +34,7 @@ def check_if_horizontal_lead(input_list, line, cell, num_rows):
                     input_list[line][cell + 2] == ".":
                 input_list[line][cell] = "!"
         except:
-            print(line, cell)
+            print("Exception on line: {} in cell: {}".format(line, cell))
 
 
 def check_if_vertical_lead(input_list, line, cell, num_columns):
