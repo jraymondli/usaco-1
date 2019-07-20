@@ -1,25 +1,31 @@
 def input_file(file_name):
     fin = open(file_name)
     count = 0
+    num_rows = 0
+    num_columns = 0
     all_points = []
     for line in fin:
         line = line.strip()
         if count > 0:
             line = list(line)
             all_points.append(line)
+        else:
+            rows, columns = line.split(" ")
+            num_rows = int(rows)
+            num_columns = int(columns)
         count += 1
     fin.close()
-    return all_points
+    return all_points, num_rows, num_columns
 
 
-def in_area(index, lst):
-    return index in range(0, len(lst))
+def in_area(index, length):
+    return index in range(0, length)
 
 
-def check_if_horizontal(input_list, line, cell):
-    if in_area(line + 2, input_list) or in_area(cell + 2, input_list):
+def check_if_horizontal_lead(input_list, line, cell, num_rows):
+    if in_area(cell + 2, num_rows):
         if input_list[line][cell] != "#":
-            if not in_area(cell - 1, input_list[line]) and input_list[line][cell + 1] == "." and input_list[line][cell + 2] == ".":
+            if not in_area(cell - 1, num_rows) and input_list[line][cell + 1] == "." and input_list[line][cell + 2] == ".":
                 input_list[line][cell] = "!"
             try:
                 if input_list[line][cell - 1] == "#" and input_list[line][cell + 1] == "." and input_list[line] \
@@ -29,14 +35,13 @@ def check_if_horizontal(input_list, line, cell):
                 pass
 
 
-def check_if_vertical(input_list, line, cell):
-    if in_area(line + 2, input_list) or in_area(cell + 2, input_list):
+def check_if_vertical_lead(input_list, line, cell, num_columns):
+    if in_area(line + 2, num_columns):
         if input_list[line][cell] != "#":
 
-            if not in_area(line - 1, input_list) and input_list[line + 1][cell] == "." and input_list[line + 2][cell] == ".":
+            if not in_area(line - 1, num_columns) and input_list[line + 1][cell] == "." and input_list[line + 2][cell] == ".":
                 input_list[line][cell] = "!"
             try:
-
                 if input_list[line - 1][cell] == "#" and input_list[line + 1][cell] == "." and \
                         input_list[line + 2][cell] == ".":
                     input_list[line][cell] = "!"
@@ -44,11 +49,11 @@ def check_if_vertical(input_list, line, cell):
                 pass
 
 
-def if_starter(input_list):
-    for line in range(len(input_list)):
-        for cell in range(len(input_list[line])):
-            check_if_horizontal(input_list, line, cell)
-            check_if_vertical(input_list, line, cell)
+def if_starter(input_list, num_rows, num_columns):
+    for line in range(0, num_rows):
+        for cell in range(0, num_columns):
+            check_if_horizontal_lead(input_list, line, cell, num_columns)
+            check_if_vertical_lead(input_list, line, cell, num_rows)
     return input_list
 
 
@@ -74,4 +79,5 @@ def output_file(input_list):
     fout.close()
 
 
-output_file(output_lines(if_starter(input_file("crosswords.in"))))
+files = input_file("crosswords.in")
+output_file(output_lines(if_starter(files[0], files[1], files[2])))
