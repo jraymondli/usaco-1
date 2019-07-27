@@ -1,41 +1,30 @@
-def input_file(file_name):
+def input_file(file_name):  # correct
     fin = open(file_name)
     count = 0
-    cows_positions = []
-    cows_speed = []
+    cows_all = []
     for line in fin:
         line = line.strip()
         if count > 0:
             pos, spd = line.split(" ")
-            cows_positions.append(int(pos))
-            cows_speed.append(int(spd))
+            cows_all.append(int(spd))
         count += 1
     fin.close()
-    return cows_positions, cows_speed
+    print(cows_all)
+    return cows_all
 
 
-def jog_once(input_cows):
-    input_cows = list(map(lambda x: [x[0]+x[1], x[1]], input_cows))
-    print(input_cows)
-    for cow in range(len(input_cows)-2):
-        print(input_cows, cow)
-        if input_cows[cow][0] == input_cows[cow+1][0]:
-            input_cows.remove(input_cows[cow])
-
-
-def cows_are_jogging(cows_pos_and_spd):
-    cows_positions = cows_pos_and_spd[0]
-    cows_speed = cows_pos_and_spd[1]
-    same_pace = False
-    while not same_pace:
-        jog_once(input_cows)
-        pace = input_cows[0][1]
-        all_same_pace = True
-        for cow in input_cows:
-            if cow[1] != pace:
-                all_same_pace = False
-        same_pace = all_same_pace
-    return len(input_cows)
+def cows_are_jogging(cows_spd):
+    reversed_cows = [cows_spd[-1*i] for i in range(1, len(cows_spd)+1)]
+    groups = [[reversed_cows[0]]]
+    print(reversed_cows)
+    for cow in range(1, len(reversed_cows)):
+        if reversed_cows[cow] > reversed_cows[cow-1]:
+            groups[-1].append(reversed_cows[cow])
+            reversed_cows[cow] = reversed_cows[cow-1]
+        else:
+            groups.append([reversed_cows[cow]])
+    print(groups)
+    return len(groups)
 
 
 def output_file(input_num):
@@ -44,4 +33,4 @@ def output_file(input_num):
     fout.close()
 
 
-output_file(cows_are_jogging(input_file("cowjog_bronze/1.in")))
+output_file(cows_are_jogging(input_file("cowjog.in")))
