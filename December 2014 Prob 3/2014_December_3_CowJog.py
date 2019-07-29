@@ -33,4 +33,4 @@ def output_file(input_num):
     fout.close()
 
 
-output_file(cows_are_jogging(input_file("cowjog.in")))
+output_file(cows_are_jogging(input_file("cowjog_bronze/1.in")))
