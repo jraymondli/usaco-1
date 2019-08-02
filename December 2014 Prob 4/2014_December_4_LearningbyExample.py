@@ -38,7 +38,7 @@ def find_all_spots(all_cows):
                     if existing_cows[current_checkpoint][1] or existing_cows[current_checkpoint+1][1]:
                         all_spots += 1
                 else:
-                    if existing_cows[[i[0] for i in existing_cows].index(min([existing_cows[current_checkpoint][0], existing_cows[current_checkpoint+1][0]], key=lambda x:abs(x-cow)))][1]:
+                    if existing_cows[existing_cows_weights.index(min([existing_cows[current_checkpoint][0], existing_cows[current_checkpoint+1][0]], key=lambda x:abs(x-cow)))][1]:
                         all_spots += 1
         else:
             if cow == max(incoming_cows):
