@@ -40,7 +40,11 @@ def find_all_spots(all_cows):
                 else:
                     possible_close_weights = [existing_cows[current_checkpoint][0], existing_cows[current_checkpoint+1][0]]
                     closest_existing_weight = min(possible_close_weights, key=lambda x: abs(x-cow))
-                    index_value = existing_cows_weights.index(closest_existing_weight)
+                    index_value = possible_close_weights.index(closest_existing_weight)
+                    if index_value == 0:
+                        index_value = current_checkpoint
+                    else:
+                        index_value = current_checkpoint+1
                     if existing_cows[index_value][1]:
                         all_spots += 1
         else:
@@ -57,4 +61,4 @@ def output_file(input_num):
     fout.close()
 
 
-output_file(find_all_spots(input_file("learning.in")))
+output_file(find_all_spots(input_file("learning_bronze/3.in")))
