@@ -28,7 +28,7 @@ def find_all_spots(all_cows):
         if passed_checkpoint:
             current_checkpoint += 1
             passed_checkpoint = False
-        if cow != min(incoming_cows) and cow != max(incoming_cows):
+        if cow != incoming_cows[0] and cow != incoming_cows[-1]:
             if cow == existing_cows[current_checkpoint+1][0]:
                 passed_checkpoint = True
                 if existing_cows[current_checkpoint+1][1]:
@@ -44,7 +44,7 @@ def find_all_spots(all_cows):
                     if existing_cows[index_value][1]:
                         all_spots += 1
         else:
-            if cow == max(incoming_cows):
+            if cow == incoming_cows[-1]:
                 current_checkpoint += 1
             if existing_cows[current_checkpoint][1]:
                 all_spots += 1
