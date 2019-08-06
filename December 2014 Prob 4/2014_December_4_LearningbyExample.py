@@ -10,7 +10,7 @@ def input_file(file_name):
             all_existing_cows.append([int(lbs), has_spots == "S"])
         else:
             cows, start, finish = line.split(" ")
-            cows_coming_in = range(int(start), int(finish)+1)
+            cows_coming_in = (int(start), int(finish))
         count += 1
     fin.close()
     all_existing_cows.sort()
@@ -20,39 +20,27 @@ def input_file(file_name):
 def find_all_spots(all_cows):
     all_spots = 0
     existing_cows = all_cows[0]
-    existing_cows_weights = [i[0] for i in existing_cows]
-    incoming_cows = all_cows[1]
-    passed_checkpoint = False
-    current_checkpoint = 0
-    for cow in incoming_cows:
-        if passed_checkpoint:
-            current_checkpoint += 1
-            passed_checkpoint = False
-        if cow != incoming_cows[0] and cow != incoming_cows[-1]:
-            if cow == existing_cows[current_checkpoint+1][0]:
-                passed_checkpoint = True
-                if existing_cows[current_checkpoint+1][1]:
-                    all_spots += 1
-            else:
-                if abs(existing_cows[current_checkpoint][0] - cow) == abs(existing_cows[current_checkpoint+1][0] - cow):
-                    if existing_cows[current_checkpoint][1] or existing_cows[current_checkpoint+1][1]:
-                        all_spots += 1
-                else:
-                    possible_close_weights = [existing_cows[current_checkpoint][0], existing_cows[current_checkpoint+1][0]]
-                    closest_existing_weight = min(possible_close_weights, key=lambda x: abs(x-cow))
-                    index_value = possible_close_weights.index(closest_existing_weight)
-                    if index_value == 0:
-                        index_value = current_checkpoint
-                    else:
-                        index_value = current_checkpoint+1
-                    if existing_cows[index_value][1]:
-                        all_spots += 1
+    coming_cows = all_cows[1]
+    if existing_cows[0][0] != coming_cows[0]:
+        existing_cows.insert(0, [coming_cows[0], existing_cows[0][1]])
+    if existing_cows[-1][0] != coming_cows[-1]:
+        existing_cows.append([coming_cows[-1], existing_cows[-1][1]])
+    if existing_cows[0][1]:
+        all_spots += 1
+    for cow in range(len(existing_cows)-1):
+        if existing_cows[cow][1] == existing_cows[cow+1][1] and existing_cows[cow+1][1] is True:
+            all_spots += (existing_cows[cow+1][0]-existing_cows[cow][0])
+        elif not existing_cows[cow][1] and not existing_cows[cow+1][1]:
+            pass
         else:
-            if cow == incoming_cows[-1]:
-                current_checkpoint += 1
-            if existing_cows[current_checkpoint][1]:
-                all_spots += 1
-    return all_spots
+            midpoint = (existing_cows[cow][0] + existing_cows[cow+1][0])/2
+            midpoint = midpoint//1
+            if existing_cows[cow][1]:
+
+                all_spots += abs(midpoint - existing_cows[cow][0])
+            else:
+                all_spots += abs(midpoint - existing_cows[cow+1][0])+1
+    return int(all_spots)
 
 
 def output_file(input_num):
@@ -61,4 +49,4 @@ def output_file(input_num):
     fout.close()
 
 
-output_file(find_all_spots(input_file("learning_bronze/3.in")))
+output_file(find_all_spots(input_file("learning.in")))
