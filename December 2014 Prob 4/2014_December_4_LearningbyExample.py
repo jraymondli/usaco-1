@@ -34,11 +34,11 @@ def find_all_spots(all_cows):
             pass
         else:
             midpoint = (existing_cows[cow][0] + existing_cows[cow+1][0])/2
-            midpoint = midpoint//1
             if existing_cows[cow][1]:
-
+                midpoint//1
                 all_spots += abs(midpoint - existing_cows[cow][0])
             else:
+                midpoint = round(midpoint)
                 all_spots += abs(midpoint - existing_cows[cow+1][0])+1
     return int(all_spots)
 
@@ -49,4 +49,4 @@ def output_file(input_num):
     fout.close()
 
 
-output_file(find_all_spots(input_file("learning.in")))
+output_file(find_all_spots(input_file("learning_bronze/2.in")))
