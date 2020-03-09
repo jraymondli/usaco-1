@@ -1,14 +1,14 @@
 def open_file():
-    fin = open('swap_bronze_feb20/9.in')
+    fin = open('swap_bronze_feb20/1.in')
     k_swaps = []
     count = 1
     for line in fin:
         line = line.strip()
         if count == 1:
             n, k = line.split(" ")
-            nlist = range(1, int(n)+1)
+            nlist = list(range(1, int(n)+1))
         else:
-            line = map(lambda x: int(x), line.split(" "))
+            line = list(map(lambda x: int(x), line.split(" ")))
             k_swaps.append(line)
         count += 1
     fin.close()
