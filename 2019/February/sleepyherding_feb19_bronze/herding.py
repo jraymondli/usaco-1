@@ -1,6 +1,6 @@
 # time = 43 min
 def open_file():
-    fin = open('herding_bronze_feb19/1.in')
+    fin = open('herding.in')
     for line in fin:
         line = line.strip()
         cows = list(map(lambda x: int(x), line.split(" ")))
