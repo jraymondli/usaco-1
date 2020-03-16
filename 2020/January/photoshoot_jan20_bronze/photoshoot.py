@@ -1,6 +1,6 @@
  #time = 53 min
 def open_file():
-    fin = open('photo_bronze_jan20/7.in')
+    fin = open('photo_bronze_jan20/1.in')
     count = 1
     for line in fin:
         line = line.strip()

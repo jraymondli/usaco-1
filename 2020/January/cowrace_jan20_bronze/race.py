@@ -1,6 +1,6 @@
  #time = 34 min
 def fin_open():
-    fin = open('race_bronze_jan20/1.in')
+    fin = open('race.in')
     distance = 0
     x_times = []
     count = 1
@@ -52,7 +52,7 @@ def calc_all_times(k_times):
 
 
 def fout_close(answers):
-    fout = open("race.txt", "w")
+    fout = open("race.out", "w")
     for answer in answers:
         fout.write("{}\n".format(answer))
     fout.close()

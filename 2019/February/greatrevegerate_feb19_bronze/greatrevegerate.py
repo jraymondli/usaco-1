@@ -1,6 +1,6 @@
 # time = 43 min
 def open_file():
-    fin = open('revegetate.in')
+    fin = open('revegetate_bronze_feb19/4.in')
     preferences = []
     pastures = 0
     count = 1
@@ -14,12 +14,10 @@ def open_file():
             preferences.append(line)
         count += 1
     fin.close()
-    print(pastures)
     return pastures, preferences
 
 
 def find_possible_set(pastures, poset, temp_set):
-
     if pastures == 0:
         poset.append(temp_set)
     else:
