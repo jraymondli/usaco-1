@@ -1,4 +1,4 @@
- #time = 36 min
+# time = 36 min
 def open_file():
     fin = open('cownomics.in')
     spotted_cows = []
@@ -8,8 +8,8 @@ def open_file():
     for line in fin:
         line = line.strip()
         if cows == 0:
-            N, M = map(lambda x: int(x), line.split(" "))
-            cows = N
+            n, m = map(lambda x: int(x), line.split(" "))
+            cows = n
         elif count < cows:
             spotted_cows.append(line[::])
         else:
