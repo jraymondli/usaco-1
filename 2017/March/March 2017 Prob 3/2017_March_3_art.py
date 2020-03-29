@@ -1,4 +1,7 @@
 # time = 36 min
+# problem: Modern Art
+#          http://www.usaco.org/index.php?page=viewproblem2&cpid=737
+#
 def open_file():
     fin = open('art.in')
     grid = []
